@@ -4,7 +4,7 @@ const cors = require('cors');
 const routes = require('./routes');
 
 const server = express();
-const port = 3000;
+const port = 4000;
 
 server.use(bodyParser.json());
 server.use(cors());
