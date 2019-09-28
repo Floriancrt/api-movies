@@ -21,18 +21,20 @@ router.get('/movie/:id', (req,res) => {
 });
 
 
-router.post('/addmovies',(req,res) => {
-    const {title, director, date } = req.body; 
+router.post('/addmovies', (req,res) => {
+    var title = req.body.title; 
+    var director = req.body.director;
+    var date = req.body.date;
 
     let sql = `INSERT INTO movies(title,director,date) VALUES("${title}","${director}","${date}")`;
     connection.query(sql, ( error, response) => {
-        if (error) res.status(400).json({ error });
-        res.status(201).json({ movie : { id: results[0].insertId, title , director, date }});
+        if (error) throw error;
+        console.log("A line has been created");
     });
 
 });
 
-router.get('/removemovies/:id',(req,res) => {
+router.get('/deletemovies/:id',(req,res) => {
     const { id } = req.params;
     connection.query(`DELETE FROM movies WHERE id = ${id}`, (error, results) => {
         if(error) res.status(201).json({ error });
